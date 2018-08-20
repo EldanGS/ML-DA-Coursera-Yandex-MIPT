@@ -10,4 +10,6 @@ Machine Learning and Data Analysis Coursera Specialization from Yandex and MIPT 
 
 ## Course 2. [Supervised learning (Обучение на размеченных данных)](https://github.com/EldanGS/ML-DA-Coursera-Yandex-MIPT/tree/master/C2%20Supervised%20learning)
   - [Homework](https://github.com/EldanGS/ML-DA-Coursera-Yandex-MIPT/tree/master/C2%20Supervised%20learning/Homework)
+  - [Lectures notebooks](https://github.com/EldanGS/ML-DA-Coursera-Yandex-MIPT/tree/master/C2%20Supervised%20learning/Lectures%20Notebook)
   - [Lectures](https://github.com/EldanGS/ML-DA-Coursera-Yandex-MIPT/tree/master/C2%20Supervised%20learning/Lectures)
+  
