@@ -1,0 +1,1020 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{OverfittingTask}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux435-ux437ux430ux434ux430ux43dux438ux435-ux43a-ux443ux440ux43eux43aux443-1-2-ux43dux435ux434ux435ux43bux44f.}{%
+\section{Практическое задание к уроку 1 (2
+неделя).}\label{ux43fux440ux430ux43aux442ux438ux447ux435ux441ux43aux43eux435-ux437ux430ux434ux430ux43dux438ux435-ux43a-ux443ux440ux43eux43aux443-1-2-ux43dux435ux434ux435ux43bux44f.}}
+
+\hypertarget{ux43bux438ux43dux435ux439ux43dux430ux44f-ux440ux435ux433ux440ux435ux441ux441ux438ux44f-ux43fux435ux440ux435ux43eux431ux443ux447ux435ux43dux438ux435-ux438-ux440ux435ux433ux443ux43bux44fux440ux438ux437ux430ux446ux438ux44f}{%
+\subsection{Линейная регрессия: переобучение и
+регуляризация}\label{ux43bux438ux43dux435ux439ux43dux430ux44f-ux440ux435ux433ux440ux435ux441ux441ux438ux44f-ux43fux435ux440ux435ux43eux431ux443ux447ux435ux43dux438ux435-ux438-ux440ux435ux433ux443ux43bux44fux440ux438ux437ux430ux446ux438ux44f}}
+
+    В этом задании мы на примерах увидим, как переобучаются линейные модели,
+разберем, почему так происходит, и выясним, как диагностировать и
+контролировать переобучение.
+
+Во всех ячейках, где написан комментарий с инструкциями, нужно написать
+код, выполняющий эти инструкции. Остальные ячейки с кодом (без
+комментариев) нужно просто выполнить. Кроме того, в задании требуется
+отвечать на вопросы; ответы нужно вписывать после выделенного слова
+``\textbf{Ответ:}''.
+
+Напоминаем, что посмотреть справку любого метода или функции (узнать,
+какие у нее аргументы и что она делает) можно с помощью комбинации
+Shift+Tab. Нажатие Tab после имени объекта и точки позволяет посмотреть,
+какие методы и переменные есть у этого объекта.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    Мы будем работать с датасетом \textbf{``bikes\_rent.csv''}, в котором по
+дням записаны календарная информация и погодные условия, характеризующие
+автоматизированные пункты проката велосипедов, а также число прокатов в
+этот день. Последнее мы будем предсказывать; таким образом, мы будем
+решать задачу регрессии.
+
+    \hypertarget{ux437ux43dux430ux43aux43eux43cux441ux442ux432ux43e-ux441-ux434ux430ux43dux43dux44bux43cux438}{%
+\subsubsection{Знакомство с
+данными}\label{ux437ux43dux430ux43aux43eux43cux441ux442ux432ux43e-ux441-ux434ux430ux43dux43dux44bux43cux438}}
+
+    Загрузите датасет с помощью функции \textbf{pandas.read\_csv} в
+переменную \textbf{df}. Выведите первые 5 строчек, чтобы убедиться в
+корректном считывании данных:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} (0 баллов)}
+        \PY{c+c1}{\PYZsh{} Считайте данные и выведите первые 5 строк}
+        \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bikes\PYZus{}rent.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 731 entries, 0 to 730
+Data columns (total 13 columns):
+season            731 non-null int64
+yr                731 non-null int64
+mnth              731 non-null int64
+holiday           731 non-null int64
+weekday           731 non-null int64
+workingday        731 non-null int64
+weathersit        731 non-null int64
+temp              731 non-null float64
+atemp             731 non-null float64
+hum               731 non-null float64
+windspeed(mph)    731 non-null float64
+windspeed(ms)     731 non-null float64
+cnt               731 non-null int64
+dtypes: float64(5), int64(8)
+memory usage: 74.3 KB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}    season  yr  mnth  holiday  weekday  workingday  weathersit       temp  \textbackslash{}
+        0       1   0     1        0        6           0           2  14.110847   
+        1       1   0     1        0        0           0           2  14.902598   
+        2       1   0     1        0        1           1           1   8.050924   
+        3       1   0     1        0        2           1           1   8.200000   
+        4       1   0     1        0        3           1           1   9.305237   
+        
+              atemp      hum  windspeed(mph)  windspeed(ms)   cnt  
+        0  18.18125  80.5833       10.749882       4.805490   985  
+        1  17.68695  69.6087       16.652113       7.443949   801  
+        2   9.47025  43.7273       16.636703       7.437060  1349  
+        3  10.60610  59.0435       10.739832       4.800998  1562  
+        4  11.46350  43.6957       12.522300       5.597810  1600  
+\end{Verbatim}
+            
+    Для каждого дня проката известны следующие признаки (как они были
+указаны в источнике данных): * \emph{season}: 1 - весна, 2 - лето, 3 -
+осень, 4 - зима * \emph{yr}: 0 - 2011, 1 - 2012 * \emph{mnth}: от 1 до
+12 * \emph{holiday}: 0 - нет праздника, 1 - есть праздник *
+\emph{weekday}: от 0 до 6 * \emph{workingday}: 0 - нерабочий день, 1 -
+рабочий день * \emph{weathersit}: оценка благоприятности погоды от 1
+(чистый, ясный день) до 4 (ливень, туман) * \emph{temp}: температура в
+Цельсиях * \emph{atemp}: температура по ощущениям в Цельсиях *
+\emph{hum}: влажность * \emph{windspeed(mph)}: скорость ветра в милях в
+час * \emph{windspeed(ms)}: скорость ветра в метрах в секунду *
+\emph{cnt}: количество арендованных велосипедов (это целевой признак,
+его мы будем предсказывать)
+
+Итак, у нас есть вещественные, бинарные и номинальные (порядковые)
+признаки, и со всеми из них можно работать как с вещественными. С
+номинальныеми признаками тоже можно работать как с вещественными, потому
+что на них задан порядок. Давайте посмотрим на графиках, как целевой
+признак зависит от остальных
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{feature} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{feature}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cnt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{subplots}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scatter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{n}{idx} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{idx} \PY{o}{\PYZpc{}} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Блок 1. Ответьте на вопросы (каждый 0.5 балла):} 1. Каков
+характер зависимости числа прокатов от месяца? * ответ: Синусоид на пике
+лето. 1. Укажите один или два признака, от которых число прокатов скорее
+всего зависит линейно * ответ: temp, и возможно atemp. Так как у них
+большая корреляция, думаю логично то-что градусы отличают на +/- 2
+градуса.
+
+    Давайте более строго оценим уровень линейной зависимости между
+признаками и целевой переменной. Хорошей мерой линейной зависимости
+между двумя векторами является корреляция Пирсона. В pandas ее можно
+посчитать с помощью двух методов датафрейма: corr и corrwith. Метод
+df.corr вычисляет матрицу корреляций всех признаков из датафрейма.
+Методу df.corrwith нужно подать еще один датафрейм в качестве аргумента,
+и тогда он посчитает попарные корреляции между признаками из df и этого
+датафрейма.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Код 1.1 (0.5 балла)}
+        \PY{c+c1}{\PYZsh{} Посчитайте корреляции всех признаков, кроме последнего, с последним с помощью метода corrwith:}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Correlation of DataFrame all features, except target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{corrwith}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{cnt}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Correlation of DataFrame all features, except target
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} season            0.406100
+        yr                0.566710
+        mnth              0.279977
+        holiday          -0.068348
+        weekday           0.067443
+        workingday        0.061156
+        weathersit       -0.297391
+        temp              0.627494
+        atemp             0.631066
+        hum              -0.100659
+        windspeed(mph)   -0.234545
+        windspeed(ms)    -0.234545
+        dtype: float64
+\end{Verbatim}
+            
+    В выборке есть признаки, коррелирующие с целевым, а значит, задачу можно
+решать линейными методами.
+
+    По графикам видно, что некоторые признаки похожи друг на друга. Поэтому
+давайте также посчитаем корреляции между вещественными признаками.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Код 1.2 (0.5 балла)}
+        \PY{c+c1}{\PYZsh{} Посчитайте попарные корреляции между признаками temp, atemp, hum, windspeed(mph), windspeed(ms) и cnt}
+        \PY{c+c1}{\PYZsh{} с помощью метода corr:}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pairwise correlation of this columns}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{temp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{atemp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hum}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{windspeed(mph)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{windspeed(ms)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cnt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Pairwise correlation of this columns
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}                     temp     atemp       hum  windspeed(mph)  windspeed(ms)  \textbackslash{}
+        temp            1.000000  0.991702  0.126963       -0.157944      -0.157944   
+        atemp           0.991702  1.000000  0.139988       -0.183643      -0.183643   
+        hum             0.126963  0.139988  1.000000       -0.248489      -0.248489   
+        windspeed(mph) -0.157944 -0.183643 -0.248489        1.000000       1.000000   
+        windspeed(ms)  -0.157944 -0.183643 -0.248489        1.000000       1.000000   
+        cnt             0.627494  0.631066 -0.100659       -0.234545      -0.234545   
+        
+                             cnt  
+        temp            0.627494  
+        atemp           0.631066  
+        hum            -0.100659  
+        windspeed(mph) -0.234545  
+        windspeed(ms)  -0.234545  
+        cnt             1.000000  
+\end{Verbatim}
+            
+    На диагоналях, как и полагается, стоят единицы. Однако в матрице имеются
+еще две пары сильно коррелирующих столбцов: temp и atemp (коррелируют по
+своей природе) и два windspeed (потому что это просто перевод одних
+единиц в другие). Далее мы увидим, что этот факт негативно сказывается
+на обучении линейной модели.
+
+    Напоследок посмотрим средние признаков (метод mean), чтобы оценить
+масштаб признаков и доли 1 у бинарных признаков.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Код 1.3 (0.5 балла)}
+         \PY{c+c1}{\PYZsh{} Выведите средние признаков}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean of features}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Mean values of features
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} season               2.496580
+         yr                   0.500684
+         mnth                 6.519836
+         holiday              0.028728
+         weekday              2.997264
+         workingday           0.683995
+         weathersit           1.395349
+         temp                20.310776
+         atemp               23.717699
+         hum                 62.789406
+         windspeed(mph)      12.762576
+         windspeed(ms)        5.705220
+         cnt               4504.348837
+         dtype: float64
+\end{Verbatim}
+            
+    Признаки имеют разный масштаб, значит для дальнейшей работы нам лучше
+нормировать матрицу объекты-признаки.
+
+    \hypertarget{ux43fux440ux43eux431ux43bux435ux43cux430-ux43fux435ux440ux432ux430ux44f-ux43aux43eux43bux43bux438ux43dux435ux430ux440ux43dux44bux435-ux43fux440ux438ux437ux43dux430ux43aux438}{%
+\subsubsection{Проблема первая: коллинеарные
+признаки}\label{ux43fux440ux43eux431ux43bux435ux43cux430-ux43fux435ux440ux432ux430ux44f-ux43aux43eux43bux43bux438ux43dux435ux430ux440ux43dux44bux435-ux43fux440ux438ux437ux43dux430ux43aux438}}
+
+    Итак, в наших данных один признак дублирует другой, и есть еще два очень
+похожих. Конечно, мы могли бы сразу удалить дубликаты, но давайте
+посмотрим, как бы происходило обучение модели, если бы мы не заметили
+эту проблему.
+
+Для начала проведем масштабирование, или стандартизацию признаков: из
+каждого признака вычтем его среднее и поделим на стандартное отклонение.
+Это можно сделать с помощью метода scale.
+
+Кроме того, нужно перемешать выборку, это потребуется для
+кросс-валидации.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{scale}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{shuffle}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{df\PYZus{}shuffled} \PY{o}{=} \PY{n}{shuffle}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{123}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{scale}\PY{p}{(}\PY{n}{df\PYZus{}shuffled}\PY{p}{[}\PY{n}{df\PYZus{}shuffled}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{df\PYZus{}shuffled}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cnt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    Давайте обучим линейную регрессию на наших данных и посмотрим на веса
+признаков.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} Код 2.1 (1 балл)}
+         \PY{c+c1}{\PYZsh{} Создайте объект линейного регрессора, обучите его на всех данных и выведите веса модели }
+         \PY{c+c1}{\PYZsh{} (веса хранятся в переменной coef\PYZus{} класса регрессора).}
+         \PY{c+c1}{\PYZsh{} Можно выводить пары (название признака, вес), воспользовавшись функцией zip, встроенной в язык python}
+         \PY{c+c1}{\PYZsh{} Названия признаков хранятся в переменной df.columns}
+         \PY{n}{model\PYZus{}lr} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model\PYZus{}lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LINEAR REGRESSION}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Weight coefficients}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} pair}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{df\PYZus{}shuffled}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{model\PYZus{}lr}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Independent term:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model\PYZus{}lr}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LINEAR REGRESSION
+Weight coefficients
+('season', 571.0)
+('yr', 1022.0)
+('mnth', -141.0)
+('holiday', -87.0)
+('weekday', 137.0)
+('workingday', 56.0)
+('weathersit', -330.0)
+('temp', 367.0)
+('atemp', 586.0)
+('hum', -146.0)
+('windspeed(mph)', 12458401589342.0)
+('windspeed(ms)', -12458401589541.0)
+
+Independent term: 4504.354437968361
+
+    \end{Verbatim}
+
+    Мы видим, что веса при линейно-зависимых признаках по модулю значительно
+больше, чем при других признаках.
+
+    Чтобы понять, почему так произошло, вспомним аналитическую формулу, по
+которой вычисляются веса линейной модели в методе наименьших квадратов:
+
+\(w = (X^TX)^{-1} X^T y\).
+
+Если в X есть коллинеарные (линейно-зависимые) столбцы, матрица \(X^TX\)
+становится вырожденной, и формула перестает быть корректной. Чем более
+зависимы признаки, тем меньше определитель этой матрицы и тем хуже
+аппроксимация \(Xw \approx y\). Такая ситуацию называют \emph{проблемой
+мультиколлинеарности}, вы обсуждали ее на лекции.
+
+    С парой temp-atemp чуть менее коррелирующих переменных такого не
+произошло, однако на практике всегда стоит внимательно следить за
+коэффициентами при похожих признаках.
+
+    \textbf{Решение} проблемы мультиколлинеарности состоит в
+\emph{регуляризации} линейной модели. К оптимизируемому функционалу
+прибавляют L1 или L2 норму весов, умноженную на коэффициент
+регуляризации \(\alpha\). В первом случае метод называется Lasso, а во
+втором --- Ridge. Подробнее об этом также рассказано в лекции.
+
+    Обучите регрессоры Ridge и Lasso с параметрами по умолчанию и убедитесь,
+что проблема с весами решилась.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{Lasso}\PY{p}{,} \PY{n}{Ridge}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Код 2.2 (0.5 балла)}
+         \PY{c+c1}{\PYZsh{} Обучите линейную модель с L1\PYZhy{}регуляризацией и выведите веса}
+         \PY{n}{model\PYZus{}lasso} \PY{o}{=} \PY{n}{Lasso}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model\PYZus{}lasso}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LASSO}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Weight coefficients}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} pair}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{df\PYZus{}shuffled}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{model\PYZus{}lasso}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Independent term:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model\PYZus{}lasso}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LASSO
+Weight coefficients
+('season', 560.0)
+('yr', 1019.0)
+('mnth', -129.0)
+('holiday', -86.0)
+('weekday', 137.0)
+('workingday', 55.0)
+('weathersit', -332.0)
+('temp', 376.0)
+('atemp', 577.0)
+('hum', -144.0)
+('windspeed(mph)', -197.0)
+('windspeed(ms)', -0.0)
+
+Independent term: 4504.3488372093025
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Код 2.3 (0.5 балла)}
+         \PY{c+c1}{\PYZsh{} Обучите линейную модель с L2\PYZhy{}регуляризацией и выведите веса}
+         \PY{n}{model\PYZus{}ridge} \PY{o}{=} \PY{n}{Ridge}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model\PYZus{}ridge}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RIDGE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Weight coefficients}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} pair}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{df\PYZus{}shuffled}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{model\PYZus{}ridge}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Independent term:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model\PYZus{}ridge}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+RIDGE
+Weight coefficients
+('season', 563.0)
+('yr', 1019.0)
+('mnth', -132.0)
+('holiday', -87.0)
+('weekday', 138.0)
+('workingday', 56.0)
+('weathersit', -332.0)
+('temp', 386.0)
+('atemp', 566.0)
+('hum', -145.0)
+('windspeed(mph)', -99.0)
+('windspeed(ms)', -99.0)
+
+Independent term: 4504.3488372093025
+
+    \end{Verbatim}
+
+    \hypertarget{ux43fux440ux43eux431ux43bux435ux43cux430-ux432ux442ux43eux440ux430ux44f-ux43dux435ux438ux43dux444ux43eux440ux43cux430ux442ux438ux432ux43dux44bux435-ux43fux440ux438ux437ux43dux430ux43aux438}{%
+\subsubsection{Проблема вторая: неинформативные
+признаки}\label{ux43fux440ux43eux431ux43bux435ux43cux430-ux432ux442ux43eux440ux430ux44f-ux43dux435ux438ux43dux444ux43eux440ux43cux430ux442ux438ux432ux43dux44bux435-ux43fux440ux438ux437ux43dux430ux43aux438}}
+
+    В отличие от L2-регуляризации, L1 обнуляет веса при некоторых признаках.
+Объяснение данному факту дается в одной из лекций курса.
+
+Давайте пронаблюдаем, как меняются веса при увеличении коэффициента
+регуляризации \(\alpha\) (в лекции коэффициент при регуляризаторе мог
+быть обозначен другой буквой).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} Код 3.1 (1 балл)}
+         \PY{n}{alphas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
+         \PY{n}{coefs\PYZus{}lasso} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{alphas}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} матрица весов размера (число регрессоров) x (число признаков)}
+         \PY{n}{coefs\PYZus{}ridge} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{alphas}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Для каждого значения коэффициента из alphas обучите регрессор Lasso}
+         \PY{c+c1}{\PYZsh{} и запишите веса в соответствующую строку матрицы coefs\PYZus{}lasso (вспомните встроенную в python функцию enumerate),}
+         \PY{c+c1}{\PYZsh{} а затем обучите Ridge и запишите веса в coefs\PYZus{}ridge.}
+         
+         \PY{c+c1}{\PYZsh{} Lasso model for different regressors}
+         \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{alphas}\PY{p}{)}\PY{p}{:}
+             \PY{n}{model\PYZus{}lasso} \PY{o}{=} \PY{n}{Lasso}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{n}{value}\PY{p}{)}
+             \PY{n}{model\PYZus{}lasso}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             \PY{n}{coefs\PYZus{}lasso}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{=} \PY{n}{model\PYZus{}lasso}\PY{o}{.}\PY{n}{coef\PYZus{}}
+         
+         \PY{c+c1}{\PYZsh{} Ridge model for different regressors}
+         \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{alphas}\PY{p}{)}\PY{p}{:}
+             \PY{n}{model\PYZus{}ridge} \PY{o}{=} \PY{n}{Ridge}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{n}{value}\PY{p}{)}
+             \PY{n}{model\PYZus{}ridge}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             \PY{n}{coefs\PYZus{}ridge}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{=} \PY{n}{model\PYZus{}ridge}\PY{o}{.}\PY{n}{coef\PYZus{}}
+             
+\end{Verbatim}
+
+
+    Визуализируем динамику весов при увеличении параметра регуляризации:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{coef}\PY{p}{,} \PY{n}{feature} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{coefs\PYZus{}lasso}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{alphas}\PY{p}{,} \PY{n}{coef}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{feature}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.4}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{alpha}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{feature weight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lasso}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{coef}\PY{p}{,} \PY{n}{feature} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{coefs\PYZus{}ridge}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{alphas}\PY{p}{,} \PY{n}{coef}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{feature}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{upper right}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.4}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{alpha}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{feature weight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ridge}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} Text(0.5,1,'Ridge')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Ответы на следующие вопросы можно давать, глядя на графики или выводя
+коэффициенты на печать.
+
+\textbf{Блок 2. Ответьте на вопросы (каждый 0.25 балла)}: 1. Какой
+регуляризатор (Ridge или Lasso) агрессивнее уменьшает веса при одном и
+том же alpha? * Ответ: Lasso, глядя на график. 1. Что произойдет с
+весами Lasso, если alpha сделать очень большим? Поясните, почему так
+происходит. * Ответ: Все коэффиценты должны стать нулем. Так как,
+коэффицент регуляризации опредляет сложность модели Lasso. И значит, при
+больших значениях оптимально будет их просто занулить. 1. Можно ли
+утверждать, что Lasso исключает один из признаков windspeed при любом
+значении alpha \textgreater{} 0? А Ridge? Ситается, что регуляризатор
+исключает признак, если коэффициент при нем \textless{} 1e-3. * Ответ:
+Lasso исключает, Ridge нет. 1. Какой из регуляризаторов подойдет для
+отбора неинформативных признаков? * Ответ: очевидно Lasso.
+
+    Далее будем работать с Lasso.
+
+Итак, мы видим, что при изменении alpha модель по-разному подбирает
+коэффициенты признаков. Нам нужно выбрать наилучшее alpha.
+
+    Для этого, во-первых, нам нужна метрика качества. Будем использовать в
+качестве метрики сам оптимизируемый функционал метода наименьших
+квадратов, то есть Mean Square Error.
+
+Во-вторых, нужно понять, на каких данных эту метрику считать. Нельзя
+выбирать alpha по значению MSE на обучающей выборке, потому что тогда мы
+не сможем оценить, как модель будет делать предсказания на новых для нее
+данных. Если мы выберем одно разбиение выборки на обучающую и тестовую
+(это называется holdout), то настроимся на конкретные ``новые'' данные,
+и вновь можем переобучиться. Поэтому будем делать несколько разбиений
+выборки, на каждом пробовать разные значения alpha, а затем усреднять
+MSE. Удобнее всего делать такие разбиения кросс-валидацией, то есть
+разделить выборку на K частей, или блоков, и каждый раз брать одну из
+них как тестовую, а из оставшихся блоков составлять обучающую выборку.
+
+    Делать кросс-валидацию для регрессии в sklearn совсем просто: для этого
+есть специальный регрессор, \textbf{LassoCV}, который берет на вход
+список из alpha и для каждого из них вычисляет MSE на кросс-валидации.
+После обучения (если оставить параметр cv=3 по умолчанию) регрессор
+будет содержать переменную \textbf{mse\_path\_}, матрицу размера
+len(alpha) x k, k = 3 (число блоков в кросс-валидации), содержащую
+значения MSE на тесте для соответствующих запусков. Кроме того, в
+переменной alpha\_ будет храниться выбранное значение параметра
+регуляризации, а в coef\_, традиционно, обученные веса, соответствующие
+этому alpha\_.
+
+Обратите внимание, что регрессор может менять порядок, в котором он
+проходит по alphas; для сопоставления с матрицей MSE лучше использовать
+переменную регрессора alphas\_.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LassoCV}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} Код 3.2 (1 балл)}
+         \PY{c+c1}{\PYZsh{} Обучите регрессор LassoCV на всех параметрах регуляризации из alpha}
+         \PY{c+c1}{\PYZsh{} Постройте график \PYZus{}усредненного\PYZus{} по строкам MSE в зависимости от alpha. }
+         \PY{c+c1}{\PYZsh{} Выведите выбранное alpha, а также пары \PYZdq{}признак\PYZhy{}коэффициент\PYZdq{} для обученного вектора коэффициентов}
+         \PY{n}{alphas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{n}{model\PYZus{}lassocv} \PY{o}{=} \PY{n}{LassoCV}\PY{p}{(}\PY{n}{alphas} \PY{o}{=} \PY{n}{alphas}\PY{p}{)}
+         \PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot MSE(alpha)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean square error dependence from regressor}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Alpha}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{alphas\PYZus{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{mse\PYZus{}path\PYZus{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} plt.axis([0, 100, 780000, 860000])}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LASSO\PYZus{}CV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Best regressor value}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Alpha = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{alpha\PYZus{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Weight coefficient for the optimal regressor}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Weight coefficients:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{df\PYZus{}shuffled}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+             
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Independent term:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+LASSO\_CV
+
+Alpha = 6
+
+Weight coefficients:
+('season', 532.0)
+('yr', 1015.0)
+('mnth', -100.0)
+('holiday', -83.0)
+('weekday', 133.0)
+('workingday', 52.0)
+('weathersit', -331.0)
+('temp', 371.0)
+('atemp', 581.0)
+('hum', -140.0)
+('windspeed(mph)', -192.0)
+('windspeed(ms)', -0.0)
+
+Independent term: 4504.3488372093025
+
+    \end{Verbatim}
+
+    Итак, мы выбрали некоторый параметр регуляризации. Давайте посмотрим,
+какие бы мы выбирали alpha, если бы делили выборку только один раз на
+обучающую и тестовую, то есть рассмотрим траектории MSE, соответствующие
+отдельным блокам выборки.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{} Код 3.3 (1 балл)}
+         \PY{c+c1}{\PYZsh{} Выведите значения alpha, соответствующие минимумам MSE на каждом разбиении (то есть по столбцам).}
+         \PY{c+c1}{\PYZsh{} На трех отдельных графиках визуализируйте столбцы .mse\PYZus{}path\PYZus{}}
+         
+         \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{mse\PYZus{}path\PYZus{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train/test split \PYZsh{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{index} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{index\PYZus{}min\PYZus{}val} \PY{o}{=} \PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{mse\PYZus{}path\PYZus{}}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{index}\PY{p}{]}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{;}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Alpha = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{, MSE = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{alphas\PYZus{}}\PY{p}{[}\PY{n}{index\PYZus{}min\PYZus{}val}\PY{p}{]}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{value}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot MSE(alpha) for train/test single split (cv = 3)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         \PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{mse\PYZus{}path\PYZus{}}
+         \PY{n}{plot\PYZus{}number} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plot\PYZus{}number} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{plot\PYZus{}number}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MSE dependence from regressor \PYZsh{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{index} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Alpha}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{alphas\PYZus{}}\PY{p}{,} \PY{n}{model\PYZus{}lassocv}\PY{o}{.}\PY{n}{mse\PYZus{}path\PYZus{}}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{index}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{740000}\PY{p}{,} \PY{l+m+mi}{880000}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train/test split \#1
+Alpha = 41, MSE = 843336.181
+Train/test split \#2
+Alpha = 6, MSE = 772598.496
+Train/test split \#3
+Alpha = 1, MSE = 745668.606
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    На каждом разбиении оптимальное значение alpha свое, и ему соответствует
+большое MSE на других разбиениях. Получается, что мы настраиваемся на
+конкретные обучающие и контрольные выборки. При выборе alpha на
+кросс-валидации мы выбираем нечто ``среднее'', что будет давать
+приемлемое значение метрики на разных разбиениях выборки.
+
+    Наконец, как принято в анализе данных, давайте проинтерпретируем
+результат.
+
+    \textbf{Блок 3. Ответьте на вопросы (каждый 0.5 балла):} 1. В последней
+обученной модели выберите 4 признака с наибольшими (положительными)
+коэфициентами (и выпишите их), посмотрите на визуализации зависимостей
+cnt от этих признаков, которые мы рисовали в блоке ``Знакомство с
+данными''. Видна ли возрастающая линейная зависимость cnt от этих
+признаков по графикам? Логично ли утверждать (из здравого смысла), что
+чем больше значение этих признаков, тем больше людей захотят взять
+велосипеды?
+
+\begin{verbatim}
+* Ответ: ('season', 532.0), ('yr', 1015.0), ('temp', 371.0), ('atemp', 581.0). Да, линейная зависимость видна. Но, утверждать что при истечением времени(year) будут брать велосипеды нельзя, и добавок к этому то-что при погоде 50+(temp, atemp) градусов не думаю что люди пойдут брать велосипеды. Тем самым можно сделать выводы, что большое значение ничего дельнего не проясняет.
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Выберите 3 признака с наибольшими по модулю отрицательными
+  коэффициентами (и выпишите их), посмотрите на соответствующие
+  визуализации. Видна ли убывающая линейная зависимость? Логично ли
+  утверждать, что чем больше величина этих признаков, тем меньше людей
+  захотят взять велосипеды?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Ответ: (`weathersit', -331.0), (`windspeed(mph)', -192.0), (`hum',
+    -140.0), да, убывающая зависимость прослеживается. Рассматривая их
+    признаки логично можно сказать что, зависимость в этих случаях
+    существует, в пределах их области определния.
+  \end{itemize}
+\item
+  Выпишите признаки с коэффициентами, близкими к нулю (\textless{}
+  1e-3). Как вы думаете, почему модель исключила их из модели (вновь
+  посмотрите на графики)? Верно ли, что они никак не влияют на спрос на
+  велосипеды?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Ответ: Очевидно что, (`windspeed(ms)', -0.0). Как раз таки данный
+    признак является линейно зависимым.
+  \end{itemize}
+\end{enumerate}
+
+    \hypertarget{ux437ux430ux43aux43bux44eux447ux435ux43dux438ux435}{%
+\subsubsection{Заключение}\label{ux437ux430ux43aux43bux44eux447ux435ux43dux438ux435}}
+
+Итак, мы посмотрели, как можно следить за адекватностью линейной модели,
+как отбирать признаки и как грамотно, по возможности не настраиваясь на
+какую-то конкретную порцию данных, подбирать коэффициент регуляризации.
+
+Стоит отметить, что с помощью кросс-валидации удобно подбирать лишь
+небольшое число параметров (1, 2, максимум 3), потому что для каждой
+допустимой их комбинации нам приходится несколько раз обучать модель, а
+это времязатратный процесс, особенно если нужно обучаться на больших
+объемах данных.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
